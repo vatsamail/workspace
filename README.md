@@ -1,2 +1,2 @@
 # workspace
-go and vue files
+go and vue files.
