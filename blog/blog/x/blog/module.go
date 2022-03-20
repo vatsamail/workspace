@@ -1,6 +1,7 @@
 package blog
 
 import (
+    "context" //added by vatsa
 	"encoding/json"
 	"fmt"
 	// this line is used by starport scaffolding # 1
@@ -77,7 +78,7 @@ func (AppModuleBasic) RegisterRESTRoutes(clientCtx client.Context, rtr *mux.Rout
 
 // RegisterGRPCGatewayRoutes registers the gRPC Gateway routes for the module.
 func (AppModuleBasic) RegisterGRPCGatewayRoutes(clientCtx client.Context, mux *runtime.ServeMux) {
-	// this line is used by starport scaffolding # 2
+    types.RegisterQueryHandlerClient(context.Background(), mux, types.NewQueryClient(clientCtx)) // added by vatsa
 }
 
 // GetTxCmd returns the capability module's root tx command.
