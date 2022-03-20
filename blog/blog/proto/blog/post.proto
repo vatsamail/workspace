@@ -1,5 +1,5 @@
 syntax = "proto3";
-package cosmonaut.blog.blog;
+package alice.blog.blog;
 option go_package = "github.com/alice/blog/x/blog/types";
 
 message Post {

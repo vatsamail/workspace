@@ -1,3 +1,7 @@
+cosmonaut --> alice
+bob --> bob
+alice --> charles
+
 Build a blog
 In this tutorial, you create a blockchain with a module that lets you write to and read data from the blockchain. This module implements create and read functionalities for a blog-like application. The end user will be able to submit new blog posts and show a list of blog posts on the blockchain.
 
