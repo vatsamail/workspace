@@ -2,7 +2,8 @@ import { txClient, queryClient, MissingWalletError, registry } from './module';
 // @ts-ignore
 import { SpVuexError } from '@starport/vuex';
 import { Params } from "./module/types/blog/params";
-export { Params };
+import { Post } from "./module/types/blog/post";
+export { Params, Post };
 async function initTxClient(vuexGetters) {
     return await txClient(vuexGetters['common/wallet/signer'], {
         addr: vuexGetters['common/env/apiTendermint']
@@ -37,8 +38,10 @@ function getStructure(template) {
 const getDefaultState = () => {
     return {
         Params: {},
+        Posts: {},
         _Structure: {
             Params: getStructure(Params.fromPartial({})),
+            Post: getStructure(Post.fromPartial({})),
         },
         _Registry: registry,
         _Subscriptions: new Set(),
@@ -69,6 +72,12 @@ export default {
                 params.query = null;
             }
             return state.Params[JSON.stringify(params)] ?? {};
+        },
+        getPosts: (state) => (params = { params: {} }) => {
+            if (!params.query) {
+                params.query = null;
+            }
+            return state.Posts[JSON.stringify(params)] ?? {};
         },
         getTypeStructure: (state) => (type) => {
             return state._Structure[type].fields;
@@ -115,6 +124,20 @@ export default {
             }
             catch (e) {
                 throw new SpVuexError('QueryClient:QueryParams', 'API Node Unavailable. Could not perform query: ' + e.message);
+            }
+        },
+        async QueryPosts({ commit, rootGetters, getters }, { options: { subscribe, all } = { subscribe: false, all: false }, params, query = null }) {
+            try {
+                const key = params ?? {};
+                const queryClient = await initQueryClient(rootGetters);
+                let value = (await queryClient.queryPosts()).data;
+                commit('QUERY', { query: 'Posts', key: { params: { ...key }, query }, value });
+                if (subscribe)
+                    commit('SUBSCRIBE', { action: 'QueryPosts', payload: { options: { all }, params: { ...key }, query } });
+                return getters['getPosts']({ params: { ...key }, query }) ?? {};
+            }
+            catch (e) {
+                throw new SpVuexError('QueryClient:QueryPosts', 'API Node Unavailable. Could not perform query: ' + e.message);
             }
         },
         async sendMsgCreatePost({ rootGetters }, { value, fee = [], memo = '' }) {

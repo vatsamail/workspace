@@ -1,7 +1,7 @@
 /* eslint-disable */
 import * as Long from "long";
 import { util, configure, Writer, Reader } from "protobufjs/minimal";
-export const protobufPackage = "cosmonaut.blog.blog";
+export const protobufPackage = "alice.blog.blog";
 const basePost = { creator: "", id: 0, title: "", body: "", tags: "" };
 export const Post = {
     encode(message, writer = Writer.create()) {

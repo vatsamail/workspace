@@ -13,6 +13,11 @@ export interface BlogQueryParamsResponse {
     /** params holds all the parameters of this module. */
     params?: BlogParams;
 }
+export interface BlogQueryPostsResponse {
+    title?: string;
+    body?: string;
+    tags?: string;
+}
 export interface ProtobufAny {
     "@type"?: string;
 }
@@ -89,5 +94,14 @@ export declare class Api<SecurityDataType extends unknown> extends HttpClient<Se
      * @request GET:/alice/blog/blog/params
      */
     queryParams: (params?: RequestParams) => Promise<HttpResponse<BlogQueryParamsResponse, RpcStatus>>;
+    /**
+     * No description
+     *
+     * @tags Query
+     * @name QueryPosts
+     * @summary Queries a list of Posts items.
+     * @request GET:/alice/blog/blog/posts
+     */
+    queryPosts: (params?: RequestParams) => Promise<HttpResponse<BlogQueryPostsResponse, RpcStatus>>;
 }
 export {};

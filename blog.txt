@@ -254,7 +254,9 @@ starport chain serve
 Create a post:
 
 Copy
-blogd tx blog create-post foo bar --from alice
+blogd tx blog create-post foo bar tag --from charles
+# go run cmd/blogd/main.go tx blog create-post foo bar tag --from alice
+
 The command output shows the transaction and asks you to sign the transaction:
 
 Copy

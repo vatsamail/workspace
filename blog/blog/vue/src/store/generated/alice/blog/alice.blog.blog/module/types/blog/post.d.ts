@@ -1,5 +1,5 @@
 import { Writer, Reader } from "protobufjs/minimal";
-export declare const protobufPackage = "cosmonaut.blog.blog";
+export declare const protobufPackage = "alice.blog.blog";
 export interface Post {
     creator: string;
     id: number;
