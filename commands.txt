@@ -1,0 +1,67 @@
+# starport v0.17.3
+# go 1.15
+
+curl https://get.starport.network/starport@v0.17.0! | bash
+
+##################################
+starport scaffold chain github.com/rama/space
+
+cd space
+starport chain serve
+
+
+cd vue
+npm install
+npm run serve
+
+
+# testing
+starport scaffold message createPost title body
+starport scaffold message --help
+
+
+# check: proto/space/tx.proto
+# check: x/space/client/cli/tx_create_post.go
+
+# clean up
+# git checkout -f && git clean -fd
+
+##########################################
+# checkers
+##########################################
+starport scaffold chain github.com/alice/checkers
+
+cd checkers
+starport chain serve
+
+
+cd vue
+npm install
+npm run serve
+
+
+# testing
+starport scaffold message createPost title body
+starport scaffold message --help
+
+
+# check: proto/space/tx.proto
+# check: x/space/client/cli/tx_create_post.go
+
+
+cd checkers
+mkdir x/checkers/rules
+curl https://raw.githubusercontent.com/batkinson/checkers-go/a09daeb1548dd4cc0145d87c8da3ed2ea33a62e3/checkers/checkers.go | sed 's/package checkers/package rules/' > x/checkers/rules/checkers.go
+
+
+starport scaffold single nextGame idValue:uint --module checkers --no-message
+
+starport scaffold map storedGame game turn red black --module checkers --no-message
+
+# check: proto/checkers/next_game.proto
+# check: proto/checkers/stored_game.proto
+# check: x/checkers/types/next_game.pb.go
+
+
+starport scaffold message createGame red black --module checkers --response idValue
+
