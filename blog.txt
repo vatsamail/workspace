@@ -273,7 +273,7 @@ Now that you have added the functionality to create posts and broadcast them to 
 To display posts, scaffold a query:
 
 Copy
-starport scaffold query posts --response title,body
+starport scaffold query posts --response title,body,tags
 Two components are responsible for querying data:
 
 An rpc inside service Query in a proto file that defines data types and specifies the HTTP API endpoint

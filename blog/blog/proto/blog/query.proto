@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "blog/params.proto";
+import "blog/post.proto"; // added by vatsa
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/alice/blog/x/blog/types";
@@ -33,12 +34,21 @@ message QueryParamsResponse {
 }
 
 message QueryPostsRequest {
+    // Adding pagination to request
+  cosmos.base.query.v1beta1.PageRequest pagination = 1; // added by vatsa
 }
 
 message QueryPostsResponse {
   string title = 1;
   string body = 2;
   string tags = 3;
+
+    // added by vatsa begin
+  // Returning a list of posts
+  repeated Post Post = 1;
+  // Adding pagination to response
+  cosmos.base.query.v1beta1.PageResponse pagination = 2;
+    //added by vatsa end
 }
 
 // this line is used by starport scaffolding # 3
