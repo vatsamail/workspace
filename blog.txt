@@ -373,6 +373,8 @@ To create a post at the command line:
 
 Copy
 blogd tx blog create-post foo bar --from alice
+# go run cmd/blogd/main.go tx blog create-post foo bar tag --from alice
+
 The transaction is output to the terminal. You are prompted to confirm the transaction:
 
 Copy
