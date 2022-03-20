@@ -1,5 +1,6 @@
 declare const _default: {
     AliceBlogAliceBlogBlog: (store: any) => void;
+    AliceBlogCosmonautBlogBlog: (store: any) => void;
     CosmosCosmosSdkCosmosAuthzV1Beta1: (store: any) => void;
     CosmosCosmosSdkCosmosBankV1Beta1: (store: any) => void;
     CosmosCosmosSdkCosmosCrisisV1Beta1: (store: any) => void;
