@@ -416,3 +416,14 @@ Write keeper methods to write data to the store
 Register query handlers
 Read data from the store and return it as a result a query
 Use the CLI to broadcast transactions
+
+#############################################
+# issue
+#############################################
+ohm-pc[252] [~/kwickly/workspace/blog/blog/]> go run cmd/blogd/main.go tx blog create-post foo bar tag --from alice
+# github.com/alice/blog/x/blog/keeper
+x/blog/keeper/grpc_query_posts.go:27:48: req.Pagination undefined (type *"github.com/alice/blog/x/blog/types".QueryPostsRequest has no field or method Pagination)
+x/blog/keeper/grpc_query_posts.go:40:36: unknown field 'Post' in struct literal of type "github.com/alice/blog/x/blog/types".QueryPostsResponse
+x/blog/keeper/grpc_query_posts.go:40:49: unknown field 'Pagination' in struct literal of type "github.com/alice/blog/x/blog/types".QueryPostsResponse
+ohm-pc[253] [~/kwickly/workspace/blog/blog/]>
+
